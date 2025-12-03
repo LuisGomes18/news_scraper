@@ -1,0 +1,60 @@
+# .gitattributes para um projecto webscraper
+# Comentários começam com # — servem para documentar o que cada secção faz.
+
+# Forçar LF em ficheiros de código (evita problemas entre Windows/Linux)
+*.py     text=auto eol=lf
+*.sh     text eol=lf
+*.md     text
+*.txt    text
+
+# Dados e ficheiros de configuração - texto quando faz sentido
+*.json   text
+*.yml    text
+*.yaml   text
+*.csv    text
+
+# Marcar binários (imagens, bases de dados, binários) para não serem tratados como texto
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.ico    binary
+*.db     binary
+*.sqlite binary
+
+# Ignorar no 'git archive' ficheiros que não fazem sentido distribuir
+.env                 export-ignore
+.env.*               export-ignore
+/.venv               export-ignore
+/.venv/**            export-ignore
+/.cache              export-ignore
+/.cache/**           export-ignore
+/tests               export-ignore
+/tests/**            export-ignore
+/docs/drafts/**      export-ignore
+
+# Marcar ficheiros grandes que normalmente não estão no repositório
+/data/**             export-ignore
+/logs/**             export-ignore
+
+# Assegurar que ficheiros executáveis preservam permissão executável (útil para scripts .sh)
+*.sh    export-subst
+
+# Linguist (GitHub) — ajudar a identificar a linguagem principal do reposítório
+*.py linguist-language=Python
+
+# Tratar arquivos de lock/build como binários (não diffs desnecessários)
+poetry.lock          binary
+Pipfile.lock         binary
+
+# Normalizar finais de linha em ficheiros do front-end (se houver)
+*.css   text
+*.html  text
+*.js    text
+
+# Prevenir diffs em ficheiros gerados (marcar como linguist-generated se necessário)
+/dist/**             export-ignore
+/build/**            export-ignore
+
+# Fallback (aplicar deteção automática para outras extensões)
+*       text=auto
